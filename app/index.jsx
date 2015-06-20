@@ -1,7 +1,10 @@
 import React from 'react';
-import HelloWorld from './hello-world';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import App from './components/app';
+
+injectTapEventPlugin();
 
 React.render(
-  <HelloWorld />,
+  <App />,
   document.body
 );
