@@ -1,0 +1,15 @@
+{
+  "name": "Lyre",
+  "version": "1.0.0",
+  "description": "",
+  "author": "zack ferro-fields",
+  "license": "ISC",
+  "main": "app.js",
+  "devDependencies": {
+    "electron-prebuilt": "^0.28.2"
+  },
+  "scripts": {
+    "test": "test",
+    "start": "electron ."
+  }
+}
