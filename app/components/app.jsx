@@ -9,18 +9,19 @@ let menuItems = [
   { route: 'settings', text: 'Settings' }
 ];
 
-class App extends React.Component {
+export default React.createClass({
+  childContextTypes: { muiTheme: React.PropTypes.object },
   componentDidMount() {
     this.refs.leftNav.close();
-  }
+  },
   onLeftIconButtonTouchTap() {
     this.refs.leftNav.toggle();
-  }
+  },
   getChildContext() {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     };
-  }
+  },
   render() {
     return (
       <section>
@@ -29,10 +30,4 @@ class App extends React.Component {
       </section>
     );
   }
-}
-
-App.childContextTypes = {
-  muiTheme: React.PropTypes.object
-};
-
-export default App;
+});
