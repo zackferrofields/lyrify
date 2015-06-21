@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var watch = require('gulp-watch');
 var proc = require('child_process');
 var electron = require('electron-prebuilt');
 var browserify = require('browserify');
@@ -17,11 +18,15 @@ gulp.task('build', function() {
   .pipe(gulp.dest('dist'));
 });
 
-gulp.task('electron', function() {
+gulp.task('electron', ['build'], function() {
   proc.spawn(electron, [process.env.PWD])
   .on('error', function(err) {
     console.log(err);
   });
 });
 
-gulp.task('default', ['build', 'electron']);
+gulp.task('watch', ['build', 'electron'], function() {
+  watch('.app/**/*.{js,jsx}', ['build']);
+});
+
+gulp.task('default', ['build', 'electron', 'watch']);

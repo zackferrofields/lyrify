@@ -10,6 +10,7 @@
     "browserify": "^10.2.4",
     "electron-prebuilt": "^0.28.2",
     "gulp": "^3.9.0",
+    "gulp-watch": "^4.2.4",
     "vinyl-source-stream": "^1.1.0"
   },
   "scripts": {
