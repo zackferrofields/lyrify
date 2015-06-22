@@ -32,7 +32,7 @@ export default React.createClass({
     let name = this.getPathname();
     return (
       <section>
-        <AppBar title="Lyrify" onLeftIconButtonTouchTap={this.onLeftIconButtonTouchTap}/>
+        <AppBar onLeftIconButtonTouchTap={this.onLeftIconButtonTouchTap} title="Lyrify"/>
         <LeftNav docked={false} menuItems={menuItems} onChange={this.onChange} ref="leftNav"/>
         <RouteHandler key={name}/>
       </section>

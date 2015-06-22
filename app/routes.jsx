@@ -5,9 +5,9 @@ import Home from './components/home';
 import Settings from './components/settings';
 
 const Routes = (
-  <Route name="app" path="/" handler={App}>
-    <Route name="settings" path="/settings" handler={Settings}/>
-    <DefaultRoute name="home" handler={Home}/>
+  <Route handler={App} name="app" path="/">
+    <Route handler={Settings} name="settings" path="/settings"/>
+    <DefaultRoute handler={Home} name="home"/>
   </Route>
 );
 
