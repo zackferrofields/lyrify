@@ -9,7 +9,7 @@ var source = require('vinyl-source-stream');
 gulp.task('build', function() {
   browserify({
     entries: 'app/index.jsx',
-    extensions: ['.jsx'],
+    extensions: ['.jsx', '.js'],
     debug: true
   })
   .transform(babelify)
@@ -26,7 +26,9 @@ gulp.task('electron', ['build'], function() {
 });
 
 gulp.task('watch', ['build', 'electron'], function() {
-  watch('.app/**/*.{js,jsx}', ['build']);
+  watch('app/**/*.{jsx, js}', function() {
+    gulp.run('build');
+  });
 });
 
 gulp.task('default', ['build', 'electron', 'watch']);
