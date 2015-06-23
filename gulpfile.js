@@ -8,7 +8,7 @@ var source = require('vinyl-source-stream');
 
 gulp.task('build', function() {
   browserify({
-    entries: 'app/index.jsx',
+    entries: 'src/main.jsx',
     extensions: ['.jsx', '.js'],
     debug: true
   })
@@ -18,6 +18,11 @@ gulp.task('build', function() {
   .pipe(gulp.dest('dist'));
 });
 
+gulp.task('copy', function() {
+  gulp.src('src/index.html')
+    .pipe(gulp.dest('dist'));
+});
+
 gulp.task('electron', ['build'], function() {
   proc.spawn(electron, [process.env.PWD])
   .on('error', function(err) {
@@ -25,8 +30,8 @@ gulp.task('electron', ['build'], function() {
   });
 });
 
-gulp.task('watch', ['build', 'electron'], function() {
-  watch('app/**/*.{jsx, js}', function() {
+gulp.task('watch', ['build', 'copy', 'electron'], function() {
+  watch('src/scripts/**/*.{jsx, js}', function() {
     gulp.run('build');
   });
 });

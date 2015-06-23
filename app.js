@@ -19,7 +19,7 @@ app.on('ready', function ready() {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600});
   // and load the index.html of the app.
-  mainWindow.loadUrl(path.join('file://', __dirname, '/index.html'));
+  mainWindow.loadUrl(path.join('file://', __dirname, '/dist/index.html'));
   // Open the devtools.
   mainWindow.openDevTools({
     detached: true

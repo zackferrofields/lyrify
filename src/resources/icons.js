@@ -6,4 +6,4 @@ export default {
   home,
   settings,
   back
-}
+};
