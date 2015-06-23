@@ -156,8 +156,8 @@
         "shouldComponentUpdate",
         "componentWillUpdate",
         "componentWillUnmount",
-        "/^on.+$/",
         "/^get.+$/",
+        "/^on.+$/",
         "/^render.+$/",
         "render"
       ]
