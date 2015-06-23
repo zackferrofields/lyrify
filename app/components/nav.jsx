@@ -1,14 +1,19 @@
 import React from 'react';
 import {Navigation} from 'react-router';
-import mui from 'material-ui';
+import {Styles, AppBar, LeftNav} from 'material-ui';
 
-let ThemeManager = new mui.Styles.ThemeManager();
-let AppBar = mui.AppBar;
-let LeftNav = mui.LeftNav;
-
+let ThemeManager = new Styles.ThemeManager();
 let menuItems = [
-  { route: '/', text: 'Home' },
-  { route: 'settings', text: 'Settings' }
+  {
+    iconClassName: 'ion-home',
+    route: '/',
+    text: 'Home'
+  },
+  {
+    iconClassName: 'ion-settings',
+    route: 'settings',
+    text: 'Settings'
+  }
 ];
 
 export default React.createClass({

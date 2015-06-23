@@ -1,8 +1,7 @@
 import React from 'react';
-import mui from 'material-ui';
+import {Styles, AppBar} from 'material-ui';
 
-let ThemeManager = new mui.Styles.ThemeManager();
-let AppBar = mui.AppBar;
+let ThemeManager = new Styles.ThemeManager();
 
 export default React.createClass({
   propTypes: {
