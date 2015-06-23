@@ -1,16 +1,17 @@
 import React from 'react';
 import {Navigation} from 'react-router';
 import {Styles, AppBar, LeftNav} from 'material-ui';
+import Icons from 'icons';
 
 let ThemeManager = new Styles.ThemeManager();
 let menuItems = [
   {
-    iconClassName: 'ion-home',
+    iconClassName: Icons.home,
     route: '/',
     text: 'Home'
   },
   {
-    iconClassName: 'ion-settings',
+    iconClassName: Icons.settings,
     route: 'settings',
     text: 'Settings'
   }
@@ -35,7 +36,7 @@ export default React.createClass({
   },
   renderHeader() {
     return (
-      <AppBar iconClassNameLeft="ion-arrow-left-a" onLeftIconButtonTouchTap={this.onLeftIconButtonTouchTap} title="Menu"/>
+      <AppBar iconClassNameLeft={Icons.back} onLeftIconButtonTouchTap={this.onLeftIconButtonTouchTap} title="Menu"/>
     );
   },
   render() {

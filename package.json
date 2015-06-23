@@ -23,5 +23,8 @@
     "react": "^0.13.3",
     "react-router": "^0.13.3",
     "react-tap-event-plugin": "^0.1.7"
+  },
+  "browser": {
+    "icons": "./app/icons.js"
   }
 }
