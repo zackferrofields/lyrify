@@ -1,4 +1,7 @@
 import React from 'react';
+import Reflux from 'reflux';
+import { Search } from '../stores';
+import Actions from '../actions';
 import {Styles, Toolbar, TextField, ToolbarGroup, IconButton, DropDownIcon} from 'material-ui';
 import Icons from 'icons';
 
@@ -9,6 +12,7 @@ let iconMenuItems = [
 ];
 
 export default React.createClass({
+  mixins: [Reflux.connect(Search)],
   childContextTypes: { muiTheme: React.PropTypes.object },
   getChildContext() {
     return {
@@ -16,7 +20,8 @@ export default React.createClass({
     };
   },
   onFocus() {
-    this.refs.search.focus();
+    // this.refs.search.focus();
+    Actions.searchYouTube(this.refs.search.getValue());
   },
   render() {
     return (
