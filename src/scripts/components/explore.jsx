@@ -1,7 +1,6 @@
 import React from 'react';
-import Reflux from 'reflux';
-import { Search } from '../stores';
 import Actions from '../actions';
+import Results from './results';
 import {Styles, Toolbar, TextField, ToolbarGroup, IconButton, DropDownIcon} from 'material-ui';
 import Icons from 'icons';
 
@@ -12,7 +11,6 @@ let iconMenuItems = [
 ];
 
 export default React.createClass({
-  mixins: [Reflux.connect(Search)],
   childContextTypes: { muiTheme: React.PropTypes.object },
   getChildContext() {
     return {
@@ -25,15 +23,18 @@ export default React.createClass({
   },
   render() {
     return (
-      <Toolbar>
-        <ToolbarGroup float="left" key={0}>
-          <IconButton className={Icons.search} onFocus={this.onFocus}/>
-          <TextField hintText="Search" ref="search"/>
-        </ToolbarGroup>
-        <ToolbarGroup float="right" key={1}>
-          <DropDownIcon iconClassName={Icons.more} menuItems={iconMenuItems} />
-        </ToolbarGroup>
-      </Toolbar>
+      <section>
+        <Toolbar>
+          <ToolbarGroup float="left" key={0}>
+            <IconButton className={Icons.search} onFocus={this.onFocus}/>
+            <TextField hintText="Search" ref="search"/>
+          </ToolbarGroup>
+          <ToolbarGroup float="right" key={1}>
+            <DropDownIcon iconClassName={Icons.more} menuItems={iconMenuItems} />
+          </ToolbarGroup>
+        </Toolbar>
+        <Results/>
+      </section>
     );
   }
 });
