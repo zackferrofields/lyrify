@@ -18,8 +18,12 @@ export default React.createClass({
     };
   },
   onFocus() {
-    // this.refs.search.focus();
-    Actions.searchYouTube(this.refs.search.getValue());
+    let query = this.refs.search.getValue();
+    if (query) {
+      Actions.searchYouTube(query);
+    } else {
+      this.refs.search.focus();
+    }
   },
   render() {
     return (
