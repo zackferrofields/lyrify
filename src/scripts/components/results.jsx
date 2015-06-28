@@ -1,7 +1,7 @@
 import React from 'react';
 import Reflux from 'reflux';
 import { Search } from '../stores';
-import { Styles, ListItem, Avatar, IconButton } from 'material-ui';
+import { Styles, List, ListItem, Avatar, IconButton } from 'material-ui';
 import Icons from 'icons';
 
 let ThemeManager = new Styles.ThemeManager();
@@ -19,7 +19,7 @@ export default React.createClass({
       return (
         <ListItem key={item.id.videoId}
           leftAvatar={<Avatar src={item.snippet.thumbnails.default.url} />}
-          rightIconButton={<IconButton className={Icons.down}/>}
+          rightIconButton={<IconButton className={Icons.download}/>}
           secondaryText={item.snippet.description || ' '}
           secondaryTextLines={2}
         >
@@ -31,9 +31,9 @@ export default React.createClass({
   render() {
     let items = this.getResultItems();
     return (
-      <ListItem>
+      <List>
         {items}
-      </ListItem>
+      </List>
     );
   }
 });

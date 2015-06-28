@@ -3,7 +3,7 @@ const settings = 'ion-settings';
 const back = 'ion-arrow-left-a';
 const search = 'ion-search';
 const more = 'ion-more';
-const down = 'ion-chevron-down';
+const download = 'ion-code-download';
 
 export default {
   home,
@@ -11,5 +11,5 @@ export default {
   back,
   search,
   more,
-  down
+  download
 };

@@ -6,10 +6,9 @@ let Search = Reflux.createStore({
   getInitialState() {
     return {
       items: []
-    }
+    };
   },
   onSearchYouTubeCompleted(response) {
-    console.log(response);
     this.trigger(response);
   },
   onSearchYouTubeFailed(error) {
