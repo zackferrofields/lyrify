@@ -1,5 +1,7 @@
-import searchYouTube from './youtube';
+import searchYouTube from './youtube-search';
+import downloadYouTube from './youtube-download';
 
 export default {
-  searchYouTube
+  searchYouTube,
+  downloadYouTube
 };

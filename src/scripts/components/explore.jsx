@@ -17,7 +17,7 @@ export default React.createClass({
       muiTheme: ThemeManager.getCurrentTheme()
     };
   },
-  onFocus() {
+  onClick() {
     let query = this.refs.search.getValue();
     if (query) {
       Actions.searchYouTube(query);
@@ -30,7 +30,7 @@ export default React.createClass({
       <section>
         <Toolbar>
           <ToolbarGroup float="left" key={0}>
-            <IconButton className={Icons.search} onFocus={this.onFocus}/>
+            <IconButton className={Icons.search} onClick={this.onClick}/>
             <TextField hintText="Search" ref="search"/>
           </ToolbarGroup>
           <ToolbarGroup float="right" key={1}>
