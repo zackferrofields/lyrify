@@ -25,13 +25,19 @@ export default React.createClass({
       this.refs.search.focus();
     }
   },
+  onSubmit(e) {
+    e.preventDefault();
+    Actions.searchYouTube(this.refs.search.getValue());
+  },
   render() {
     return (
       <section>
         <Toolbar>
           <ToolbarGroup float="left" key={0}>
-            <IconButton className={Icons.search} onClick={this.onClick}/>
-            <TextField hintText="Search" ref="search"/>
+            <form onSubmit={this.onSubmit}>
+              <IconButton className={Icons.search} onClick={this.onClick}/>
+              <TextField hintText="Search" ref="search"/>
+              </form>
           </ToolbarGroup>
           <ToolbarGroup float="right" key={1}>
             <DropDownIcon iconClassName={Icons.more} menuItems={iconMenuItems} />
