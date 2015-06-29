@@ -31,7 +31,7 @@ gulp.task('electron', ['build'], function() {
 });
 
 gulp.task('watch', ['build', 'copy', 'electron'], function() {
-  watch('src/scripts/**/*.{jsx, js}', function() {
+  watch('src/scripts/**/*.{jsx,js}', function() {
     gulp.run('build');
   });
 });
