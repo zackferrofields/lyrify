@@ -33,9 +33,12 @@ export default function(video) {
       let name = info.title.replace(/\W/g, '');
       let audioFormat = audioFormats.reduce((acc, audio) => audio.audioBitrate > acc.audioBitrate ? audio : acc, { audioBitrate: 0 });
       let filename = `${name}.${audioFormat.container}`;
-      let location = `./app/resources/sounds/${filename}`;
-      ytdl(info.loaderUrl, { format: audioFormat })
-      .on('error', reject.bind(null, info))
+      let location = `./src/resources/sounds/${filename}`;
+      ytdl.downloadFromInfo(info, { format: audioFormat })
+      .on('error', err => {
+        fs.unlinkSync(location);
+        reject(err, info);
+      })
       // .on('format', formatInfo => fileSize = formatInfo.size)
       // .on('data', data => self.progressed(fileName, (dataRead += data.length) / fileSize))
       .on('end', resolve.bind(null, info))
