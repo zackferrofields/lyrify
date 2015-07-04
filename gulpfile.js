@@ -1,21 +1,34 @@
-var gulp = require('gulp');
-var watch = require('gulp-watch');
-var proc = require('child_process');
+var del = require('del');
 var electron = require('electron-prebuilt');
-var browserify = require('browserify');
-var babelify = require('babelify');
-var source = require('vinyl-source-stream');
+var gulp = require('gulp');
+var proc = require('child_process');
+var watch = require('gulp-watch');
+var gutil = require('gulp-util');
+var webpack = require("webpack");
 
-gulp.task('build', function() {
-  browserify({
-    entries: 'src/main.jsx',
-    extensions: ['.jsx', '.js'],
-    debug: true
-  })
-  .transform(babelify)
-  .bundle()
-  .pipe(source('bundle.js'))
-  .pipe(gulp.dest('dist'));
+var webpackConfig = require('./webpack.config.js');
+var paths = {
+  BUILD: './dist'
+};
+
+gulp.task('clean', function(cb) {
+  del([ paths.BUILD ], cb);
+});
+
+gulp.task('build', function(cb) {
+  var config = Object.create(webpackConfig);
+  config.plugins = config.plugins.concat(
+    new webpack.DefinePlugin({ 'process.env': { 'NODE_ENV': JSON.stringify('production') } }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin()
+  );
+  webpack(config, function(err, stats) {
+    if (err) {
+      throw new gutil.PluginError('webpack:build', err);
+    }
+    gutil.log('[webpack]', stats.toString({ colors: true }));
+    cb();
+  });
 });
 
 gulp.task('copy', function() {
@@ -36,4 +49,4 @@ gulp.task('watch', ['build', 'copy', 'electron'], function() {
   });
 });
 
-gulp.task('default', ['build', 'electron', 'watch']);
+gulp.task('default', ['clean', 'build', 'copy', 'electron']);
