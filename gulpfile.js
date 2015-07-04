@@ -1,10 +1,11 @@
 var del = require('del');
 var electron = require('electron-prebuilt');
 var gulp = require('gulp');
+var gulpSequence = require('gulp-sequence');
+var gutil = require('gulp-util');
 var proc = require('child_process');
 var watch = require('gulp-watch');
-var gutil = require('gulp-util');
-var webpack = require("webpack");
+var webpack = require('webpack');
 
 var webpackConfig = require('./webpack.config.js');
 var paths = {
@@ -36,17 +37,15 @@ gulp.task('copy', function() {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('electron', ['build'], function() {
+gulp.task('electron', function() {
   proc.spawn(electron, [process.env.PWD])
   .on('error', function(err) {
     console.log(err);
   });
 });
 
-gulp.task('watch', ['build', 'copy', 'electron'], function() {
-  watch('src/scripts/**/*.{jsx,js}', function() {
-    gulp.run('build');
-  });
+gulp.task('watch', function() {
+  watch('src/scripts/**/*.{jsx,js}', gulpSequence('build'));
 });
 
-gulp.task('default', ['clean', 'build', 'copy', 'electron']);
+gulp.task('default', gulpSequence('clean', ['build', 'copy'], 'electron'));
