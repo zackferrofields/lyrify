@@ -19,6 +19,26 @@ function parseVideo(video) {
   return str;
 }
 
+function onError(location, err) {
+  fs.unlinkSync(location);
+  this(err);
+}
+
+function onEnd(info) {
+  this(info);
+}
+
+function onData(id, data) {
+  // let progress = (dataRead += data.length) / fileSize)
+  let progress = data.length;
+  console.log(progress);
+}
+
+function onFormat(id, info) {
+  // let size = info.size;
+  console.log(info);
+}
+
 export default function(video) {
   let uri = parseVideo(video);
   return new Promise((resolve, reject) => {
@@ -30,18 +50,16 @@ export default function(video) {
       if (!audioFormats.length) {
         return reject(new Error(`${uri} doesn't contain an audio format`));
       }
+      let id = info.video_id;
       let name = info.title.replace(/\W/g, '');
       let audioFormat = audioFormats.reduce((acc, audio) => audio.audioBitrate > acc.audioBitrate ? audio : acc, { audioBitrate: 0 });
       let filename = `${name}.${audioFormat.container}`;
       let location = `./src/resources/sounds/${filename}`;
       ytdl.downloadFromInfo(info, { format: audioFormat })
-      .on('error', err => {
-        fs.unlinkSync(location);
-        reject(err, info);
-      })
-      // .on('format', formatInfo => fileSize = formatInfo.size)
-      // .on('data', data => self.progressed(fileName, (dataRead += data.length) / fileSize))
-      .on('end', resolve.bind(null, info))
+      .on('error', onError.bind(reject, location))
+      .on('format', onFormat.bind(null, id))
+      .on('data', onData.bind(null, id))
+      .on('end', onEnd.bind(resolve, info))
       .pipe(fs.createWriteStream(location));
     });
   });
