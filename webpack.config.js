@@ -25,15 +25,20 @@ module.exports = {
     }]
   },
   resolve: {
-    root: path.join(__dirname, 'src'),
+    root: __dirname,
     extensions: ['', '.js', '.jsx', '.json'],
     modulesDirectories: ['bower_components', 'node_modules'],
     alias: {
-      icons: path.join(__dirname, 'src/resources/icons.js')
+      icons: path.join(__dirname, 'src/resources/icons.js'),
+      'rx': path.join(__dirname, 'node_modules/rx/index.js'),
+      'rx.binding': path.join(__dirname, 'node_modules/rx/dist/rx.binding.js'),
+      'rx.virtualtime': path.join(__dirname, 'node_modules/rx/dist/rx.virtualtime.js')
     }
   },
   plugins: [
     new webpack.optimize.DedupePlugin()
   ],
-  externals: []
+  externals: [{
+
+  }]
 };
