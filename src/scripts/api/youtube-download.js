@@ -19,13 +19,13 @@ function parseVideo(video) {
   return str;
 }
 
-function onError(location, err) {
+function onError(reject, location, err) {
   fs.unlinkSync(location);
-  this(err);
+  reject(err);
 }
 
-function onEnd(info) {
-  this(info);
+function onEnd(resolve, info) {
+  resolve(info);
 }
 
 function onData(id, data) {
@@ -56,10 +56,10 @@ export default function(video) {
       let filename = `${name}.${audioFormat.container}`;
       let location = `./src/resources/sounds/${filename}`;
       ytdl.downloadFromInfo(info, { format: audioFormat })
-      .on('error', onError.bind(reject, location))
+      .on('error', onError.bind(null, reject, location))
       .on('format', onFormat.bind(null, id))
       .on('data', onData.bind(null, id))
-      .on('end', onEnd.bind(resolve, info))
+      .on('end', onEnd.bind(null, resolve, info))
       .pipe(fs.createWriteStream(location));
     });
   });
