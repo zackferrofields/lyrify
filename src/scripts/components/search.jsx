@@ -21,7 +21,7 @@ export default React.createClass({
         Rx.Observable.fromPromise(Actions.searchYouTube(query))
           .retry(3);
           // TODO: cancel the original http request
-          //.takeUntil(events);
+          // .takeUntil(events);
       });
   },
   getChildContext() {
