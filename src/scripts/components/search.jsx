@@ -9,17 +9,20 @@ let ThemeManager = new Styles.ThemeManager();
 export default React.createClass({
   childContextTypes: { muiTheme: React.PropTypes.object },
   componentDidMount() {
-    let search = React.findDOMNode(this.refs.search);
-    let events = Rx.Observable.fromEvent(search, 'submit');
+    let form = React.findDOMNode(this.refs.form);
+    let events = Rx.Observable.fromEvent(form, 'submit');
     events.forEach( e => {
       e.preventDefault();
-      Actions.searchYouTube(search.value.trim());
+      Actions.searchYouTube(this.getQuery());
     });
   },
   getChildContext() {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     };
+  },
+  getQuery() {
+    return this.refs.search.getValue().trim();
   },
   onClick() {
     let query = this.refs.search.getValue();
@@ -31,8 +34,8 @@ export default React.createClass({
   },
   render() {
     return (
-      <form ref="search">
-        <IconButton className={Icons.search} onClick={this.onClick}/>
+      <form ref="form">
+        <IconButton className={Icons.search}/>
         <TextField hintText="Search" ref="search"/>
       </form>
     );

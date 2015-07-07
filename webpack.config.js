@@ -30,9 +30,7 @@ module.exports = {
     modulesDirectories: ['bower_components', 'node_modules'],
     alias: {
       icons: path.join(__dirname, 'src/resources/icons.js'),
-      'rx': path.join(__dirname, 'node_modules/rx/index.js'),
-      'rx.binding': path.join(__dirname, 'node_modules/rx/dist/rx.binding.js'),
-      'rx.virtualtime': path.join(__dirname, 'node_modules/rx/dist/rx.virtualtime.js')
+      rx: path.join(__dirname, 'node_modules/rx/dist/rx.all.js')
     }
   },
   plugins: [
