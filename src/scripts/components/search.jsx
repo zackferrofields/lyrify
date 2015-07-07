@@ -9,12 +9,12 @@ let ThemeManager = new Styles.ThemeManager();
 export default React.createClass({
   childContextTypes: { muiTheme: React.PropTypes.object },
   componentDidMount() {
-    let form = React.findDOMNode(this.refs.form);
-    let events = Rx.Observable.fromEvent(form, 'submit');
-    events.forEach( e => {
-      e.preventDefault();
-      Actions.searchYouTube(this.getQuery());
-    });
+    let onKeyUps = Rx.Observable.fromEvent(this.refs.search._getInputNode(), 'keyup');
+    onKeyUps
+      .buffer( () => onKeyUps.throttle(250) )
+      .forEach( () => {
+        Actions.searchYouTube(this.getQuery());
+      });
   },
   getChildContext() {
     return {
