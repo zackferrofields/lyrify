@@ -1,5 +1,4 @@
 import React from 'react';
-import Actions from '../actions';
 import Results from './results';
 import Search from './search';
 import {Styles, Toolbar, ToolbarGroup, DropDownIcon} from 'material-ui';
@@ -17,18 +16,6 @@ export default React.createClass({
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     };
-  },
-  onClick() {
-    let query = this.refs.search.getValue();
-    if (query) {
-      Actions.searchYouTube(query);
-    } else {
-      this.refs.search.focus();
-    }
-  },
-  onSubmit(e) {
-    e.preventDefault();
-    Actions.searchYouTube(this.refs.search.getValue());
   },
   render() {
     return (
