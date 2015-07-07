@@ -25,19 +25,14 @@ export default React.createClass({
     return this.refs.search.getValue().trim();
   },
   onClick() {
-    let query = this.refs.search.getValue();
-    if (query) {
-      Actions.searchYouTube(query);
-    } else {
-      this.refs.search.focus();
-    }
+    this.refs.search.focus();
   },
   render() {
     return (
-      <form ref="form">
-        <IconButton className={Icons.search}/>
+      <div>
+        <IconButton className={Icons.search} onClick={this.onClick}/>
         <TextField hintText="Search" ref="search"/>
-      </form>
+      </div>
     );
   }
 });
