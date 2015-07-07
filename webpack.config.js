@@ -32,8 +32,8 @@ module.exports = {
       icons: path.join(__dirname, 'src/resources/icons.js')
     }
   },
-  plugins: [],
-  externals: [],
-  debug: true,
-  devtool: 'source-map'
+  plugins: [
+    new webpack.optimize.DedupePlugin()
+  ],
+  externals: []
 };

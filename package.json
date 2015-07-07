@@ -17,7 +17,8 @@
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.2.4",
     "json-loader": "^0.5.2",
-    "webpack": "^1.10.1"
+    "webpack": "^1.10.1",
+    "webpack-dev-server": "^1.10.1"
   },
   "scripts": {
     "start": "gulp"
