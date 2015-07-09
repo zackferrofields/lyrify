@@ -43,9 +43,7 @@ export default function(video) {
   let uri = parseVideo(video);
   return new Promise((resolve, reject) => {
     ytdl.getInfo(uri, (err, info) => {
-      if (err) {
-        return reject(err);
-      }
+      if (err) return reject(err);
       let audioFormats = info.formats.filter(format => format.container && format.type.startsWith('audio'));
       if (!audioFormats.length) {
         return reject(new Error(`${uri} doesn't contain an audio format`));

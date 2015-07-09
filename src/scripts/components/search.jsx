@@ -12,11 +12,8 @@ export default React.createClass({
   childContextTypes: { muiTheme: React.PropTypes.object },
   componentDidMount() {
     let events = Rx.Observable.fromEvent(this.refs.search._getInputNode(), 'keypress');
-    let enter = events
-      .filter( event => event.keyCode === ENTER_KEY);
-    let notEnter = events
-      .filter( event => event.keyCode !== ENTER_KEY)
-      .throttle(250);
+    let enter = events.filter( event => event.keyCode === ENTER_KEY);
+    let notEnter = events.filter( event => event.keyCode !== ENTER_KEY).throttle(250);
     Rx.Observable.merge(enter, notEnter)
       .map(event => event.target.value.trim())
       .filter(query => query !== '')
