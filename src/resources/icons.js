@@ -1,15 +1,19 @@
-const home = 'ion-home';
-const settings = 'ion-settings';
 const back = 'ion-arrow-left-a';
-const search = 'ion-search';
-const more = 'ion-more';
 const download = 'ion-code-download';
+const home = 'ion-home';
+const more = 'ion-more';
+const next = 'ion-chevron-right';
+const previous = 'ion-chevron-left';
+const search = 'ion-search';
+const settings = 'ion-settings';
 
 export default {
-  home,
-  settings,
   back,
-  search,
+  download,
+  home,
   more,
-  download
+  next,
+  previous,
+  search,
+  settings
 };
