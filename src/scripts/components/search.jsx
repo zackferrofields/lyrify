@@ -15,15 +15,13 @@ export default React.createClass({
   componentDidMount() {
     let events = Rx.Observable.fromEvent(this.refs.search._getInputNode(), 'keypress');
     let enter = events.filter( event => event.keyCode === ENTER_KEY);
-    let notEnter = events.filter( event => event.keyCode !== ENTER_KEY).throttle(250);
+    let notEnter = events.filter( event => event.keyCode !== ENTER_KEY).throttle(500);
     Rx.Observable.merge(enter, notEnter)
       .map(event => event.target.value.trim())
       .filter(query => query !== '')
-      .forEach( query => {
-        Rx.Observable.fromPromise(Actions.searchYouTube(query))
-          .retry(3);
-          // TODO: cancel the original http request
-          // .takeUntil(events);
+      .flatMapLatest(query => Rx.Observable.fromPromise(Actions.searchYouTube(query)))
+      .subscribe(result => {
+        console.log(result);
       });
   },
   getChildContext() {
