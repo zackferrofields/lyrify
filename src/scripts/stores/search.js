@@ -2,19 +2,22 @@ import Reflux from 'reflux';
 import { Record } from 'immutable';
 import Actions from '../actions';
 
-let Results = new Record({
+let ResultRecord = new Record({
   items: [],
   prevPageToken: undefined,
   nextPageToken: undefined
 });
 
+let results = new ResultRecord();
+
 let Search = Reflux.createStore({
   listenables: [Actions],
   getInitialState() {
-    return new Results();
+    return results.toJS();
   },
   onSearchYouTubeCompleted(response) {
-    this.trigger(new Results(response));
+    results = results.merge(new ResultRecord(response));
+    this.trigger(results.toJS());
   },
   onSearchYouTubeFailed(error) {
     console.log(error);
