@@ -1,11 +1,12 @@
 import axios from 'axios';
 
-const url = 'https://www.googleapis.com/youtube/v3/search';
-const key = 'AIzaSyArV70XKUil3cEj4nKn1yuMXCHiuK2AytI';
 const fields = ['items(id,snippet)', 'prevPageToken', 'nextPageToken'].join(',');
-const part = ['snippet'].join(',');
+const key = 'AIzaSyArV70XKUil3cEj4nKn1yuMXCHiuK2AytI';
 const maxResults = 5;
 const order = 'relevance';
+const part = ['snippet'].join(',');
+const type = 'video';
+const url = 'https://www.googleapis.com/youtube/v3/search';
 
 function checkStatus(response) {
   if (response.status !== 200) {
@@ -22,7 +23,7 @@ function parseJSON(response) {
 
 export default function(q, pageToken) {
   return axios.get(url, {
-    params: { key, fields, part, maxResults, order, q, pageToken}
+    params: { fields, key, maxResults, order, pageToken, part, q, type }
   })
   .then(checkStatus)
   .then(parseJSON);
