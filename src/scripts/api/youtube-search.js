@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const url = 'https://www.googleapis.com/youtube/v3/search';
 const key = 'AIzaSyArV70XKUil3cEj4nKn1yuMXCHiuK2AytI';
-const fields = ['etag', 'items', 'prevPageToken', 'nextPageToken'].join(',');
-const part = 'snippet';
+const fields = ['items', 'prevPageToken', 'nextPageToken'].join(',');
+const part = ['id', 'snippet'].join(',');
 const maxResults = 5;
 const order = 'relevance';
 
