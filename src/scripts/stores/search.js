@@ -1,9 +1,9 @@
 import Reflux from 'reflux';
-import { Record } from 'immutable';
+import { List, Record } from 'immutable';
 import Actions from '../actions';
 
 let ResultRecord = new Record({
-  items: [],
+  items: new List(),
   prevPageToken: undefined,
   nextPageToken: undefined
 });
@@ -15,8 +15,10 @@ let Search = Reflux.createStore({
   getInitialState() {
     return results.toJS();
   },
-  onSearchYouTubeCompleted(response) {
-    results = results.merge(new ResultRecord(response));
+  onSearchYouTubeCompleted({ items, nextPageToken }) {
+    results = results
+      .set('items', results.get('items').concat(items))
+      .set('nextPageToken', nextPageToken);
     this.trigger(results.toJS());
   },
   onSearchYouTubeFailed(error) {
