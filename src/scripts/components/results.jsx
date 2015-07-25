@@ -23,9 +23,7 @@ let ResultItem = React.createClass({
         secondaryText={item.snippet.description || ' '}
         secondaryTextLines={2}
       >
-        {item.snippet.title}
-        &nbsp;
-        {item.info ? item.info.formats.length : 0}
+        {item.snippet.title} - {item.info ? item.info.formats.length : 0}
       </ListItem>
     );
   }
