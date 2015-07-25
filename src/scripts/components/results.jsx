@@ -24,6 +24,8 @@ let ResultItem = React.createClass({
         secondaryTextLines={2}
       >
         {item.snippet.title}
+        &nbsp;
+        {item.info ? item.info.formats.length : 0}
       </ListItem>
     );
   }

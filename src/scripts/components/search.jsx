@@ -20,9 +20,12 @@ export default React.createClass({
       .map(event => event.target.value.trim())
       .filter(query => query !== '')
       .flatMapLatest(query => Rx.Observable.fromPromise(Actions.searchYouTube(query)))
-      .subscribe(result => {
-        console.log(result);
-      });
+      .pluck('items')
+      .concatMap(items => {
+        let promises = items.map(item => Actions.infoYouTube(item.id.videoId));
+        return Rx.Observable.fromPromise(Promise.all(promises));
+      })
+      .subscribe();
   },
   getChildContext() {
     return {
