@@ -15,6 +15,14 @@ let Search = Reflux.createStore({
   getInitialState() {
     return searchRecord;
   },
+  onInfoYouTubeCompleted({videoId, info}) {
+    searchRecord = searchRecord
+      .setIn(['items', videoId], Object.assign(searchRecord.getIn(['items', videoId]), { info }));
+    this.trigger(searchRecord);
+  },
+  onInfoYouTubeFailed(error) {
+    console.log(error);
+  },
   onSearchYouTubeCompleted({ items, nextPageToken }) {
     searchRecord = searchRecord
       .set('items', searchRecord.get('items').merge(new OrderedMap( items.map(item => [item.id.videoId, item]))))

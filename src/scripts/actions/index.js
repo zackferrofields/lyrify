@@ -1,16 +1,14 @@
 import Reflux from 'reflux';
-import { searchYouTube, downloadYouTube } from '../api';
+import { downloadYouTube, searchYouTube, infoYouTube } from '../api';
 
 let Actions = Reflux.createActions({
-  'searchYouTube': {
-    asyncResult: true
-  },
-  'downloadYouTube': {
-    asyncResult: true
-  }
+  downloadYouTube: { asyncResult: true },
+  infoYouTube: { asyncResult: true },
+  searchYouTube: { asyncResult: true }
 });
 
-Actions.searchYouTube.listenAndPromise(searchYouTube);
 Actions.downloadYouTube.listenAndPromise(downloadYouTube);
+Actions.infoYouTube.listenAndPromise(infoYouTube);
+Actions.searchYouTube.listenAndPromise(searchYouTube);
 
 export default Actions;
