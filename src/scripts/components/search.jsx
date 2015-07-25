@@ -3,7 +3,7 @@ import React from 'react';
 import Reflux from 'reflux';
 import { Search } from '../stores';
 import Actions from '../actions';
-import {Styles, TextField, IconButton} from 'material-ui';
+import { Styles, TextField, IconButton } from 'material-ui';
 import Icons from 'icons';
 
 let ThemeManager = new Styles.ThemeManager();
@@ -19,7 +19,7 @@ export default React.createClass({
       .flatMapLatest(query => Rx.Observable.fromPromise(Actions.searchYouTube(query)))
       .merge(
         Rx.Observable.fromEvent(React.findDOMNode(this.refs.next), 'click')
-          .flatMapLatest(() => Rx.Observable.fromPromise(Actions.searchYouTube(this.refs.search.getValue(), this.state.results.nextPageToken)))
+          .flatMapLatest(() => Rx.Observable.fromPromise(Actions.searchYouTube(this.state.results.query, this.state.results.nextPageToken)))
       )
       .pluck('items')
       .concatMap(items => {

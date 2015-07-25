@@ -3,6 +3,7 @@ import { OrderedMap, Record } from 'immutable';
 import Actions from '../actions';
 
 let SearchRecord = new Record({
+  query: undefined,
   items: new OrderedMap(),
   prevPageToken: undefined,
   nextPageToken: undefined
@@ -23,8 +24,9 @@ let Search = Reflux.createStore({
   onInfoYouTubeFailed(error) {
     console.log(error);
   },
-  onSearchYouTubeCompleted({ items, nextPageToken }) {
+  onSearchYouTubeCompleted({ query, items, nextPageToken }) {
     searchRecord = searchRecord
+      .set('query', query)
       .set('items', searchRecord.get('items').merge(new OrderedMap( items.map(item => [item.id.videoId, item]))))
       .set('nextPageToken', nextPageToken);
     this.trigger(searchRecord);

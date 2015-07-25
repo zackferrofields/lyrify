@@ -18,7 +18,7 @@ function checkStatus(response) {
 }
 
 function parseJSON(response) {
-  return response.data;
+  return Object.assign({}, response.data, { query: response.config.params.q });
 }
 
 export default function(q, pageToken) {
