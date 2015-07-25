@@ -17,7 +17,11 @@ module.exports = {
     loaders: [{
       test: /\.(js|jsx)$/,
       exclude: /(node_modules|bower_components)/,
-      loader: 'babel'
+      loader: 'babel',
+      query: {
+        optional: ['runtime'],
+        stage: 0
+      }
     },
     {
      test: /\.json$/,
